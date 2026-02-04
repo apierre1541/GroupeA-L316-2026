@@ -17,14 +17,14 @@ class Actualite
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $contenu = null;
-
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[ORM\Column(length: 255)]
+    private ?string $contenu = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTime $date = null;
 
     public function getId(): ?int
     {
@@ -43,18 +43,6 @@ class Actualite
         return $this;
     }
 
-    public function getContenu(): ?string
-    {
-        return $this->contenu;
-    }
-
-    public function setContenu(string $contenu): static
-    {
-        $this->contenu = $contenu;
-
-        return $this;
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -67,14 +55,26 @@ class Actualite
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getContenu(): ?string
     {
-        return $this->createdAt;
+        return $this->contenu;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setContenu(string $contenu): static
     {
-        $this->createdAt = $createdAt;
+        $this->contenu = $contenu;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTime
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTime $date): static
+    {
+        $this->date = $date;
 
         return $this;
     }
