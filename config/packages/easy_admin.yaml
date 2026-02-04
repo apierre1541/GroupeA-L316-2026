@@ -1,8 +1,5 @@
 # config/packages/easy_admin.yaml
 easy_admin:
-    # FORCER la désactivation de Webpack
-    webpack_encore:
-        enabled: false
     
     # Désactiver TOUS les assets
     design:
@@ -15,5 +12,4 @@ easy_admin:
     
     # Options pour désactiver les features
     options:
-        use_webpack: false
         use_asset_mapper: true
