@@ -35,6 +35,18 @@
             "./migrations/.gitignore"
         ]
     },
+    "easycorp/easyadmin-bundle": {
+        "version": "4.28",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "4.14",
+            "ref": "13b3e524d1038a6861ad6c7fc64e31b644ba0c54"
+        },
+        "files": [
+            "./config/routes/easyadmin.yaml"
+        ]
+    },
     "phpunit/phpunit": {
         "version": "11.5",
         "recipe": {
@@ -100,6 +112,18 @@
         "files": [
             "./.env",
             "./.env.dev"
+        ]
+    },
+    "symfony/form": {
+        "version": "7.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.2",
+            "ref": "7d86a6723f4a623f59e2bf966b6aad2fc461d36b"
+        },
+        "files": [
+            "./config/packages/csrf.yaml"
         ]
     },
     "symfony/framework-bundle": {
@@ -178,6 +202,18 @@
             "./config/packages/notifier.yaml"
         ]
     },
+    "symfony/property-info": {
+        "version": "7.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.3",
+            "ref": "dae70df71978ae9226ae915ffd5fad817f5ca1f7"
+        },
+        "files": [
+            "./config/packages/property_info.yaml"
+        ]
+    },
     "symfony/routing": {
         "version": "7.0",
         "recipe": {
@@ -244,6 +280,15 @@
             "./templates/base.html.twig"
         ]
     },
+    "symfony/uid": {
+        "version": "7.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.0",
+            "ref": "0df5844274d871b37fc3816c57a768ffc60a43a5"
+        }
+    },
     "symfony/ux-turbo": {
         "version": "2.32",
         "recipe": {
@@ -252,6 +297,18 @@
             "version": "2.19",
             "ref": "9dd2778a116b6e5e01e5e1582d03d5a9e82630de"
         }
+    },
+    "symfony/ux-twig-component": {
+        "version": "2.32",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.13",
+            "ref": "f367ae2a1faf01c503de2171f1ec22567febeead"
+        },
+        "files": [
+            "./config/packages/twig_component.yaml"
+        ]
     },
     "symfony/validator": {
         "version": "7.0",
