@@ -12,7 +12,21 @@
                         <h5 class="card-title">{{ actualite.titre }}</h5>
                         <div class="card-text">{{ actualite.contenu|raw }}</div>
                         <p class="text-muted">{{ actualite.date|date('d/m/Y') }}</p>
-                        <a href="#"class="btn btn-primary">Ajouter un commentaire</a>
+                        Commentaire : </br>
+                        {% for comment in actualite.commentaires %}
+                            {{ comment.libelle }}
+                            <a href="{{ path('app_commentaire_edit', {'id': comment.id}) }}"class="btn btn-primary">Modifier</a>
+                            <a href="{{ path('app_signaler_commentaire_new', {'id': actualite.id}) }}"class="btn btn-primary">Signaler un commentaire</a>
+                            <form method="post" 
+                                action="{{ path('app_commentaire_delete', {'id': comment.id}) }}" 
+                                onsubmit="return confirm('Supprimer ce commentaire ?');"
+                                style="display: inline;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                                <button type="submit" class="btn btn-primary btn-sm">Supprimer</button>
+                            </form>
+                            </br>
+                         {% endfor %}</br></br>
+                        <a href="{{ path('app_commentaire_new', {'id': actualite.id}) }}"class="btn btn-primary">Ajouter un commentaire</a>
                         </div>
                         </div>
                     </div>
