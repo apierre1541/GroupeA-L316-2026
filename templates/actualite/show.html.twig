@@ -1,38 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Actualite{% endblock %}
+{% block title %}Actualité{% endblock %}
 
 {% block body %}
-    <h1>Actualite</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ actualite.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ actualite.titre }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ actualite.image }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ actualite.contenu }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ actualite.date ? actualite.date|date('Y-m-d') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_actualite_index') }}">back to list</a>
-
-    <a href="{{ path('app_actualite_edit', {'id': actualite.id}) }}">edit</a>
-
-    {{ include('actualite/_delete_form.html.twig') }}
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="col-lg-12">
+                    <img src="{{ 'uploads/actualites/' ~ actualite.image }}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ actualite.titre }}</h5>
+                        <h5 class="card-title">{{ actualite.contenu }}</h5>
+                        <h5 class="card-title">{{ actualite.date|date('d/m/Y') }}</h5>
+                        <a href="#"class="btn btn-primary">Ajouter un commentaire</a>
+                    </div>
+                </div>                
+            </div>
+        </div>
+    <div>
 {% endblock %}

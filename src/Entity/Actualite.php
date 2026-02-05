@@ -35,9 +35,16 @@ class Actualite
     #[ORM\JoinTable(name: 'actualite_categorie')]
     private Collection $categories;
 
+    /**
+     * @var Collection<int, Commentaire>
+     */
+    #[ORM\OneToMany(targetEntity: Commentaire::class, mappedBy: 'actualite')]
+    private Collection $commentaires;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,6 +120,36 @@ class Actualite
     public function removeCategory(Categorie $category): static
     {
         $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getCommentaires(): Collection
+    {
+        return $this->commentaires;
+    }
+
+    public function addCommentaire(Commentaire $commentaire): static
+    {
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires->add($commentaire);
+            $commentaire->setActualite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentaire(Commentaire $commentaire): static
+    {
+        if ($this->commentaires->removeElement($commentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($commentaire->getActualite() === $this) {
+                $commentaire->setActualite(null);
+            }
+        }
 
         return $this;
     }

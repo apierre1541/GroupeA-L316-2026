@@ -17,28 +17,9 @@ final class ActualiteController extends AbstractController
     #[Route(name: 'app_actualite_index', methods: ['GET'])]
     public function index(ActualiteRepository $actualiteRepository): Response
     {
+        $actualites = $actualiteRepository->findAll();
         return $this->render('actualite/index.html.twig', [
-            'actualites' => $actualiteRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_actualite_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $actualite = new Actualite();
-        $form = $this->createForm(ActualiteType::class, $actualite);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($actualite);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_actualite_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('actualite/new.html.twig', [
-            'actualite' => $actualite,
-            'form' => $form,
+            'actualites' => $actualites,
         ]);
     }
 
@@ -48,34 +29,5 @@ final class ActualiteController extends AbstractController
         return $this->render('actualite/show.html.twig', [
             'actualite' => $actualite,
         ]);
-    }
-
-    #[Route('/{id}/edit', name: 'app_actualite_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Actualite $actualite, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(ActualiteType::class, $actualite);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_actualite_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('actualite/edit.html.twig', [
-            'actualite' => $actualite,
-            'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_actualite_delete', methods: ['POST'])]
-    public function delete(Request $request, Actualite $actualite, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$actualite->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($actualite);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_actualite_index', [], Response::HTTP_SEE_OTHER);
     }
 }
