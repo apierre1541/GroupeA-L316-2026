@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 
 class ActualiteCrudController extends AbstractCrudController
@@ -25,7 +26,10 @@ class ActualiteCrudController extends AbstractCrudController
             TextField::new('Titre')->setColumns(12),
             TextEditorField::new('Contenu')->setColumns(12),
             ImageField::new('Image')->setColumns(12)->setBasePath('/actualites')->setUploadDir('/public/actualites'),
-            DateField::new('Date')->setFormat('dd/MM/yyyy'), 
+            DateField::new('Date')->setFormat('dd/MM/yyyy'),
+            AssociationField::new('categories', 'Catégories')->setFormTypeOptions([
+                'by_reference' => false,
+                'multiple' => true,])->autocomplete()->setColumns(12)
         ];
     }
     
