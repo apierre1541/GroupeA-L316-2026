@@ -1,0 +1,29 @@
+<?php //easyadmin.routes.fqcn_to_route
+
+return [PHP_INT_MAX, [
+    'App\\Controller\\Admin\\DashboardController' => [
+        '' => [
+            '' => 'admin',
+        ],
+        'App\\Controller\\Admin\\ActualiteCrudController' => [
+            'index' => 'admin_actualite_index',
+            'new' => 'admin_actualite_new',
+            'batchDelete' => 'admin_actualite_batch_delete',
+            'autocomplete' => 'admin_actualite_autocomplete',
+            'renderFilters' => 'admin_actualite_render_filters',
+            'edit' => 'admin_actualite_edit',
+            'delete' => 'admin_actualite_delete',
+            'detail' => 'admin_actualite_detail',
+        ],
+        'App\\Controller\\Admin\\CategorieCrudController' => [
+            'index' => 'admin_categorie_index',
+            'new' => 'admin_categorie_new',
+            'batchDelete' => 'admin_categorie_batch_delete',
+            'autocomplete' => 'admin_categorie_autocomplete',
+            'renderFilters' => 'admin_categorie_render_filters',
+            'edit' => 'admin_categorie_edit',
+            'delete' => 'admin_categorie_delete',
+            'detail' => 'admin_categorie_detail',
+        ],
+    ],
+]];
