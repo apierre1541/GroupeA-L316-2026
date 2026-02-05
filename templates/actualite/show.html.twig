@@ -10,12 +10,12 @@
                     <img src="{{ 'uploads/actualites/' ~ actualite.image }}" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title">{{ actualite.titre }}</h5>
-                        <h5 class="card-title">{{ actualite.contenu }}</h5>
-                        <h5 class="card-title">{{ actualite.date|date('d/m/Y') }}</h5>
-                        <a href="#"class="btn btn-primary">Ajouter un commentaire</a>
+                        <div class="card-text">{{ actualite.contenu|raw }}</div>
+                        <p class="text-muted">{{ actualite.date|date('d/m/Y') }}</p>
+                        </div>
                     </div>
                 </div>                
             </div>
         </div>
-    <div>
+    </div>
 {% endblock %}
