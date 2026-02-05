@@ -7,6 +7,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+
 
 class ActualiteCrudController extends AbstractCrudController
 {
@@ -15,14 +18,15 @@ class ActualiteCrudController extends AbstractCrudController
         return Actualite::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('Titre')->setColumns(12),
+            TextEditorField::new('Contenu')->setColumns(12),
+            ImageField::new('Image')->setColumns(12)->setBasePath('/actualites')->setUploadDir('/public/actualites'),
+            DateField::new('Date')->setFormat('dd/MM/yyyy'), 
         ];
     }
-    */
+    
 }
