@@ -26,7 +26,6 @@ final class ActualiteController extends AbstractController
     #[Route('/{id}', name: 'app_actualite_show', methods: ['GET'])]
     public function show(Actualite $actualite): Response
     {
-        //$commentaire = $commentaireRepository->findAll();
         return $this->render('actualite/show.html.twig', [
             'actualite' => $actualite,
         ]);

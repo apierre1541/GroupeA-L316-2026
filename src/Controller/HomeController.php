@@ -13,7 +13,6 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(ActualiteRepository $actualiteRepository): Response
     {
-        // Récupérer les 3 dernières actualités
         $latestActualites = $actualiteRepository->findLatest(3);
         
         return $this->render('home/index.html.twig', [

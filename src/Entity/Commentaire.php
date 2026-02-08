@@ -82,7 +82,6 @@ class Commentaire
     public function removeSignalerCommentaire(SignalerCommentaire $signalerCommentaire): static
     {
         if ($this->signalerCommentaires->removeElement($signalerCommentaire)) {
-            // set the owning side to null (unless already changed)
             if ($signalerCommentaire->getCommentaire() === $this) {
                 $signalerCommentaire->setCommentaire(null);
             }
