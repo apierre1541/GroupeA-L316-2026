@@ -1,0 +1,240 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Notre Entreprise{% endblock %}
+
+{% block body %}
+    <!-- Navigation Bar avec nouvelle couleur -->
+<!-- Navigation Bar avec nouvelle couleur -->
+<nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="{{ path('app_home') }}">
+            <i class="bi bi-building me-2"></i> Notre Entreprise
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Bouton Actualités -->
+                <li class="nav-item mx-1">
+                    <a class="nav-link" href="/admin/actualite">
+                        <i class="bi bi-newspaper me-1"></i> Actualités
+                    </a>
+                </li>
+                
+                <!-- Bouton Présentation Entreprise -->
+                <li class="nav-item mx-1">
+                    <a class="nav-link" href="/admin/actualite">
+                        <i class="bi bi-building me-1"></i> Présentation
+                    </a>
+                </li>
+                
+                <!-- Bouton Contact -->
+                <li class="nav-item mx-1">
+                    <a class="nav-link" href="/admin/actualite">
+                        <i class="bi bi-envelope me-1"></i> Contact
+                    </a>
+                </li>
+                
+                <!-- Bouton Inscription -->
+                <li class="nav-item mx-1">
+                    <a class="nav-link" href="/admin/actualite">
+                        <i class="bi bi-person-plus me-1"></i> Inscription
+                    </a>
+                </li>
+                
+                <!-- BOUTON CONNEXION AVEC DROPDOWN CORRIGÉ -->
+                <li class="nav-item dropdown mx-1">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownConnexion"
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-box-arrow-in-right me-1"></i> Connexion
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownConnexion">
+                        <li>
+                            <a class="dropdown-item" href="/admin/actualite">
+                                <i class="bi bi-person me-2"></i> Client
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <a class="dropdown-item" href="/admin">
+                                <i class="bi bi-shield-lock me-2"></i> Collaborateur
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">Bienvenue sur notre site</h1>
+            <p class="lead mb-4">Découvrez les dernières actualités et informations importantes</p>
+            <a href="/admin/actualite" class="btn btn-light btn-lg">
+                <i class="bi bi-arrow-right me-2"></i> Voir nos actualités
+            </a>
+        </div>
+    </header>
+
+    <!-- Section Dernières Actualités -->
+    <section class="py-5 section-content">
+        <div class="container">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="text-center mb-3">
+                        <i class="bi bi-megaphone me-2"></i> Dernières Actualités
+                    </h2>
+                    <p class="text-center text-muted">Restez informé avec nos dernières publications</p>
+                </div>
+            </div>
+
+            {% if actualites is not empty %}
+                <div class="row">
+                    {% for actualite in actualites %}
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                {% if actualite.image %}
+                                    <img src="{{ asset('uploads/' ~ actualite.image) }}" 
+                                         class="card-img-top" 
+                                         alt="{{ actualite.titre }}">
+                                {% else %}
+                                    <div class="card-img-placeholder">
+                                        <i class="bi bi-image"></i>
+                                    </div>
+                                {% endif %}
+                                
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title fw-bold">{{ actualite.titre }}</h5>
+                                    
+                                    <div class="mb-2">
+                                        <small class="text-muted">
+                                            <i class="bi bi-calendar me-1"></i> 
+                                            {{ actualite.date|date('d/m/Y') }}
+                                        </small>
+                                    </div>
+                                    
+                                    <p class="card-text flex-grow-1">
+                                        {{ actualite.contenu|slice(0, 100) }}...
+                                    </p>
+                                    
+                                    <div class="mt-auto pt-3">
+                                        <a href="/admin/actualite/{{ actualite.id }}" class="btn btn-outline-primary w-100">
+                                            <i class="bi bi-eye me-1"></i> Lire la suite
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="/admin/actualite" class="btn btn-primary btn-lg px-4">
+                        <i class="bi bi-list-ul me-2"></i> Voir toutes les actualités
+                    </a>
+                </div>
+                
+            {% else %}
+                <div class="alert alert-info text-center py-4">
+                    <i class="bi bi-info-circle me-2"></i> Aucune actualité pour le moment.
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Section Call to Action -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h3 class="fw-bold">Vous avez des questions ?</h3>
+                    <p class="mb-0">N'hésitez pas à nous contacter pour plus d'informations.</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <a href="/admin/actualite" class="btn btn-primary btn-lg px-4">
+                        <i class="bi bi-chat-dots me-2"></i> Nous contacter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer amélioré -->
+    <footer class="footer-custom">
+        <div class="container">
+            <div class="row">
+                <!-- Colonne 1 : À propos -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>À propos de nous</h5>
+                    <p>
+                        Une entreprise innovante au service de ses clients depuis 2024. 
+                        Nous nous engageons à fournir des solutions de qualité adaptées 
+                        à vos besoins.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-linkedin"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Colonne 2 : Liens rapides -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>Liens rapides</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ path('app_home') }}"><i class="bi bi-chevron-right"></i> Accueil</a></li>
+                        <li><a href="/admin/actualite"><i class="bi bi-chevron-right"></i> Actualités</a></li>
+                        <li><a href="/admin/actualite"><i class="bi bi-chevron-right"></i> Présentation</a></li>
+                        <li><a href="/admin/actualite"><i class="bi bi-chevron-right"></i> Contact</a></li>
+                        <li><a href="/admin/actualite"><i class="bi bi-chevron-right"></i> Inscription</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Colonne 3 : Contact -->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <h5>Contactez-nous</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class="bi bi-geo-alt"></i> 123 Rue de l'Innovation, 75000 Paris</a></li>
+                        <li><a href="tel:+33123456789"><i class="bi bi-telephone"></i> +33 1 23 45 67 89</a></li>
+                        <li><a href="mailto:contact@notreentreprise.com"><i class="bi bi-envelope"></i> contact@notreentreprise.com</a></li>
+                    </ul>
+                    
+                    <!-- Newsletter -->
+                    <div class="newsletter-form">
+                        <h6 class="mb-3">Restez informé</h6>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Votre email">
+                            <button class="btn" type="button">
+                                <i class="bi bi-send"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer bottom -->
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>
+                            <i class="bi bi-c-circle"></i> {{ "now"|date("Y") }} Notre Entreprise. 
+                            Tous droits réservés.
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p>
+                            <a href="#" class="me-3">Mentions légales</a>
+                            <a href="#">Politique de confidentialité</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
