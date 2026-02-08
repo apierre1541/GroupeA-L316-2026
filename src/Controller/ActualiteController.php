@@ -3,27 +3,22 @@
 namespace App\Controller;
 
 use App\Entity\Actualite;
-use App\Form\ActualiteType;
 use App\Repository\ActualiteRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/actualite')]
-final class ActualiteController extends AbstractController
+class ActualiteController extends AbstractController
 {
-    #[Route(name: 'app_actualite_index', methods: ['GET'])]
+    #[Route('/actualites', name: 'app_actualite_index')]
     public function index(ActualiteRepository $actualiteRepository): Response
     {
-        $actualites = $actualiteRepository->findAll();
         return $this->render('actualite/index.html.twig', [
-            'actualites' => $actualites,
+            'actualites' => $actualiteRepository->findAll(),
         ]);
     }
 
-    #[Route('/{id}', name: 'app_actualite_show', methods: ['GET'])]
+    #[Route('/actualites/{id}', name: 'app_actualite_show')]
     public function show(Actualite $actualite): Response
     {
         return $this->render('actualite/show.html.twig', [
