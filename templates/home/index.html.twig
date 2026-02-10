@@ -37,34 +37,74 @@
                         <i class="bi bi-envelope me-1"></i> Contact
                     </a>
                 </li>
-                
-                <!-- Bouton Inscription -->
-                <li class="nav-item mx-1">
-                    <a class="nav-link" href="/admin/actualite">
-                        <i class="bi bi-person-plus me-1"></i> Inscription
-                    </a>
-                </li>
-                
-                <!-- BOUTON CONNEXION AVEC DROPDOWN -->
-                <li class="nav-item dropdown mx-1">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownConnexion"
-                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="bi bi-box-arrow-in-right me-1"></i> Connexion
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownConnexion">
-                        <li>
-                            <a class="dropdown-item" href="/admin/actualite">
-                                <i class="bi bi-person me-2"></i> Client
-                            </a>
-                        </li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li>
-                            <a class="dropdown-item" href="/admin">
-                                <i class="bi bi-shield-lock me-2"></i> Collaborateur
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+
+                {% if app.user %}
+                    <!-- Bouton Admin (pour collaborateurs seulement) -->
+                    {% if is_granted('ROLE_COLLABORATEUR') %}
+                    <li class="nav-item mx-1">
+                        <a class="nav-link btn btn-warning btn-sm text-dark" href="/admin">
+                            <i class="bi bi-shield-lock me-1"></i> Admin
+                        </a>
+                    </li>
+                    {% endif %}
+
+                    <!-- Menu utilisateur connecté avec dropdown -->
+                    <li class="nav-item dropdown mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUser"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle me-1"></i> {{ app.user.email }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
+                            <li>
+                                <h6 class="dropdown-header">
+                                    {% if is_granted('ROLE_COLLABORATEUR') %}
+                                        Collaborateur
+                                    {% else %}
+                                        Client
+                                    {% endif %}
+                                </h6>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form method="post" action="/logout" class="dropdown-item p-0">
+                                    <button type="submit" class="btn btn-link text-decoration-none text-dark w-100 text-start">
+                                        <i class="bi bi-box-arrow-right me-2"></i> Déconnexion
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <!-- Bouton Inscription -->
+                    <li class="nav-item mx-1">
+                        <a class="nav-link" href="/inscription">
+                            <i class="bi bi-person-plus me-1"></i> Inscription
+                        </a>
+                    </li>
+
+                    <!-- BOUTON CONNEXION AVEC DROPDOWN -->
+                    <li class="nav-item dropdown mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownConnexion"
+                           role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Connexion
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownConnexion">
+                            <!-- Client -->
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_login') }}">
+                                    <i class="bi bi-person me-2"></i> Client
+                                </a>
+                            </li>
+                            
+                            <!-- Collaborateur -->
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_login') }}">
+                                    <i class="bi bi-shield-lock me-2"></i> Collaborateur
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>
