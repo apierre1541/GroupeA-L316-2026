@@ -1,0 +1,140 @@
+{# templates/emails/contact_admin.html.twig #}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nouveau message de contact</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color: #f8f9fa; padding: 20px;">
+    <div class="container" style="max-width: 600px;">
+        <!-- Carte principale -->
+        <div class="card shadow-lg border-0 rounded-4">
+            
+            <!-- En-tête -->
+            <div class="card-header bg-primary text-white text-center p-4 rounded-top-4 border-0">
+                <h1 class="display-6 fw-bold mb-2">Nouveau message</h1>
+                <p class="mb-0 opacity-75">{{ "now"|date('d/m/Y H:i') }}</p>
+            </div>
+            
+            <!-- Corps de l'email -->
+            <div class="card-body p-5">
+                
+                <!-- Badge -->
+                <div class="text-center mb-4">
+                    <span class="badge bg-primary bg-opacity-10 text-primary px-4 py-2 rounded-pill">
+                        <strong>Formulaire de contact</strong>
+                    </span>
+                </div>
+                
+                <!-- Informations contact -->
+                <h2 class="h4 text-primary mb-4">
+                    <i class="bi bi-person-circle me-2"></i>Informations du contact
+                </h2>
+                
+                <div class="bg-light p-4 rounded-3 mb-4">
+                    <div class="row mb-3">
+                        <div class="col-4 fw-bold">Nom complet :</div>
+                        <div class="col-8">{{ contact.nom }} {{ contact.prenom }}</div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-4 fw-bold">Email :</div>
+                        <div class="col-8">
+                            <a href="mailto:{{ contact.email }}" class="text-decoration-none text-primary">
+                                {{ contact.email }}
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-4 fw-bold">Téléphone :</div>
+                        <div class="col-8">
+                            {% if contact.telephone %}
+                                <a href="tel:{{ contact.telephone }}" class="text-decoration-none text-primary">
+                                    {{ contact.telephone }}
+                                </a>
+                            {% else %}
+                                <span class="text-muted">Non renseigné</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-4 fw-bold">Date :</div>
+                        <div class="col-8">{{ "now"|date('d/m/Y H:i:s') }}</div>
+                    </div>
+                </div>
+                
+                <!-- Message -->
+                <h2 class="h4 text-primary mb-4 mt-5">
+                    <i class="bi bi-chat-dots me-2"></i>Message
+                </h2>
+                
+                <div class="bg-primary bg-opacity-10 p-4 rounded-3 border-start border-primary border-4 mb-4">
+                    <p class="mb-0 fst-italic" style="white-space: pre-line;">
+                        {{ contact.message }}
+                    </p>
+                </div>
+                
+                <!-- Pièce jointe -->
+                {% if contact.pieceJointe %}
+                <div class="bg-info bg-opacity-10 p-4 rounded-3 mb-4">
+                    <h3 class="h6 fw-bold text-info mb-3">
+                        <i class="bi bi-paperclip me-2"></i>Pièce jointe
+                    </h3>
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-file-earmark-text fs-4 text-info me-3"></i>
+                        <div>
+                            <span class="fw-bold">{{ contact.pieceJointe }}</span>
+                            <br>
+                            <small class="text-muted">Fichier joint au message</small>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                <!-- Boutons d'action -->
+                <div class="d-grid gap-3 d-md-flex justify-content-md-center mt-5">
+                    <a href="mailto:{{ contact.email }}" class="btn btn-primary btn-lg px-5 rounded-pill">
+                        <i class="bi bi-envelope me-2"></i>Répondre
+                    </a>
+                    <a href="#" class="btn btn-outline-secondary btn-lg px-5 rounded-pill">
+                        <i class="bi bi-person me-2"></i>Voir détails
+                    </a>
+                </div>
+                
+                <!-- Lien vers admin -->
+                <div class="text-center mt-4">
+                    <small class="text-muted">
+                        <i class="bi bi-box-arrow-up-right me-1"></i>
+                        <a href="#" class="text-decoration-none">Accéder à l'administration</a>
+                    </small>
+                </div>
+            </div>
+            
+            <!-- Pied de page -->
+            <div class="card-footer bg-light text-center p-4 rounded-bottom-4 border-0">
+                <p class="mb-1 fw-bold text-secondary">Email envoyé automatiquement</p>
+                <p class="mb-0 text-muted small">
+                    <i class="bi bi-building me-1"></i>Votre entreprise - Tous droits réservés
+                </p>
+                <p class="mt-2 mb-0 text-muted small">
+                    Cet email a été envoyé depuis le formulaire de contact de votre site web.
+                </p>
+            </div>
+        </div>
+        
+        <!-- Message d'information -->
+        <div class="text-center mt-4 text-muted small">
+            <p class="mb-0">© {{ "now"|date('Y') }} Votre entreprise. Tous droits réservés.</p>
+        </div>
+    </div>
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</body>
+</html>

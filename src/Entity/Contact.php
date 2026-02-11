@@ -28,7 +28,7 @@ class Contact
     #[ORM\Column(length: 255)]
     private ?string $message = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)] 
     private ?string $piece_jointe = null;
 
     public function getId(): ?int
