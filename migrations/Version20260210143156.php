@@ -37,7 +37,7 @@ final class Version20260210143156 extends AbstractMigration
         $this->addSql('DROP TABLE IF EXISTS users');
     }
 
-    
+
     public function down(Schema $schema): void
     {
         $this->addSql('CREATE TABLE IF NOT EXISTS sequelizemeta (
