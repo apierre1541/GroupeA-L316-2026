@@ -34,7 +34,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-
             ->add('isCollaborateur', CheckboxType::class, [
                 'mapped' => false,
                 'required' => false,

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Contact{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-5">
+                        <h1 class="text-center mb-4">Remplir le formulaire de contact</h1>
+                        
+                        {{ form_start(contactForm, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+                        
+                        <div class="form-group mb-3">
+                            <label for="nom" class="form-label fw-bold">Nom</label>
+                            {{ form_widget(contactForm.nom, {'attr': {'class': 'form-control', 'placeholder': 'Votre nom'}}) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="prenom" class="form-label fw-bold">Prénom</label>
+                            {{ form_widget(contactForm.prenom, {'attr': {'class': 'form-control', 'placeholder': 'Votre prénom'}}) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="email" class="form-label fw-bold">Email</label>
+                            {{ form_widget(contactForm.email, {'attr': {'class': 'form-control', 'placeholder': 'votre.email@example.com'}}) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="telephone" class="form-label fw-bold">Téléphone</label>
+                            {{ form_widget(contactForm.telephone, {'attr': {'class': 'form-control', 'placeholder': '+33 X XX XX XX XX'}}) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="message" class="form-label fw-bold">Message</label>
+                            {{ form_widget(contactForm.message, {'attr': {'class': 'form-control', 'placeholder': 'Veuillez formuler votre demande'}}) }}
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="piece_jointe" class="form-label fw-bold">Pièces jointes</label>
+                            {{ form_widget(contactForm.piece_jointe, {'attr': {'class': 'form-control', 'placeholder': 'Veuillez selectionner 1 ou plusieurs fichier'}}) }}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mb-3">Envoyer votre demande</button>
+                        
+                        {{ form_end(contactForm) }}
+                        
+                        <p class="text-center text-muted">
+                            Retourner à l'<a href="{{ path('app_home') }}" class="text-primary text-decoration-none fw-bold">accueil</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+{% endblock %}
