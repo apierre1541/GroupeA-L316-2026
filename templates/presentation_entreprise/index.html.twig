@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PresentationEntreprise index{% endblock %}
+
+{% block body %}
+   <div class="container my-5">
+        <div class="bg-primary text-white p-5 rounded-4 mb-5 text-center">
+            <h1 class="display-5 fw-bold">Présentation de notre entreprise</h1>
+        </div>
+
+        {# Boucle pour afficher TOUTES les entreprises #}
+        {% for entreprise in presentation_entreprises %}
+            <div class="row g-4 mb-5">
+                <div class="col-lg-5">
+                    <div class="card border-0 shadow h-100">
+                        <div class="card-body text-center p-4">
+                            {% if entreprise.logo %}
+                                <img src="{{ asset('uploads/logos/' ~ entreprise.logo) }}" 
+                                    alt="Logo" 
+                                    class="img-fluid rounded-circle mb-4 shadow-sm"
+                                    style="max-width: 150px;">
+                            {% endif %}
+                            
+                            {% if entreprise.image %}
+                                <img src="{{ asset('uploads/images/' ~ entreprise.image) }}" 
+                                    alt="Image entreprise" 
+                                    class="img-fluid rounded-3 shadow-sm">
+                            {% endif %}
+                            
+                            {% if not entreprise.logo and not entreprise.image %}
+                                <div class="py-5">
+                                    <i class="bi bi-building fs-1 text-secondary"></i>
+                                    <p class="text-secondary mt-3">Aucune image disponible</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-7">
+                    <div class="card border-0 shadow h-100">
+                        <div class="card-body p-4 p-lg-5">
+                            <h2 class="h3 text-primary mb-4">
+                                <i class="bi bi-briefcase me-2"></i>Nos services - Entreprise #{{ loop.index }}
+                            </h2>
+                            
+                            <div class="bg-light p-4 rounded-3 mb-5">
+                                <p class="lead mb-0 text-secondary">
+                                    {{ entreprise.serviceProposee }}
+                                </p>
+                            </div>
+                            
+                            <h3 class="h5 text-dark mb-4">
+                                <i class="bi bi-telephone me-2"></i>Contactez-nous
+                            </h3>
+                            
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item bg-transparent px-0">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-envelope fs-5 text-primary me-3"></i>
+                                        <div>
+                                            <small class="text-muted d-block">Email</small>
+                                            <a href="mailto:{{ entreprise.email }}" class="text-decoration-none">
+                                                <strong>{{ entreprise.email }}</strong>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="list-group-item bg-transparent px-0">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-telephone fs-5 text-success me-3"></i>
+                                        <div>
+                                            <small class="text-muted d-block">Téléphone</small>
+                                            <a href="tel:{{ entreprise.telephone }}" class="text-decoration-none">
+                                                <strong>{{ entreprise.telephone }}</strong>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="list-group-item bg-transparent px-0">
+                                    <div class="d-flex align-items-start">
+                                        <i class="bi bi-geo-alt fs-5 text-danger me-3"></i>
+                                        <div>
+                                            <small class="text-muted d-block">Adresse</small>
+                                            <strong>
+                                                {{ entreprise.adressePostal }}<br>
+                                                {{ entreprise.codePostal }} {{ entreprise.commune }}
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            {# Séparateur entre les entreprises (sauf après la dernière) #}
+            {% if not loop.last %}
+                <hr class="my-5 border-3 opacity-25">
+            {% endif %}
+            
+        {% else %}
+            {# Aucune entreprise trouvée #}
+            <div class="alert alert-info text-center py-5">
+                <i class="bi bi-building fs-1 d-block mb-3"></i>
+                <h3>Aucune entreprise trouvée</h3>
+                <p class="mb-4">Aucune information d'entreprise n'est disponible pour le moment.</p>
+                <a href="{{ path('app_home') }}" class="btn btn-primary">
+                    <i class="bi bi-house me-2"></i>Retour à l'accueil
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
