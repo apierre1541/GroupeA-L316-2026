@@ -38,7 +38,7 @@ final class CommentaireController extends AbstractController
 
         return $this->render('commentaire/new.html.twig', [
             'actualite' => $actualite,
-            'form' => $form,
+            'commentaireForm' => $form->createView(),
         ]);
     }
 
@@ -58,7 +58,7 @@ final class CommentaireController extends AbstractController
 
         return $this->render('commentaire/edit.html.twig', [
             'commentaire' => $commentaire,
-            'form' => $form,
+            'commentaireForm' => $form->createView(),
         ]);
     }
 

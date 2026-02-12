@@ -1,10 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Commentaire{% endblock %}
+{% block title %}Modifier le commentaire{% endblock %}
 
 {% block body %}
-    <h1>Edit Commentaire</h1>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg border-0">
+                    <div class="card-body p-5">
+                        <h1 class="text-center mb-4">
+                            <i class="bi bi-pencil-square me-2"></i>
+                            Modifier votre commentaire
+                        </h1>
+                        
+                        {{ form_start(commentaireForm, {'attr': {'class': 'needs-validation', 'novalidate': true}}) }}
+                        
+                        <div class="form-group mb-3">
+                            <label for="libelle" class="form-label fw-bold">Commentaire</label>
+                            {{ form_widget(commentaireForm.libelle, {
+                                'attr': {
+                                    'class': 'form-control',
+                                    'placeholder': 'Votre commentaire',
+                                    'rows': 5
+                                }
+                            }) }}
+                            {{ form_errors(commentaireForm.libelle) }}
+                        </div>
 
-    {{ include('commentaire/_form.html.twig', {'button_label': 'Update'}) }}
-
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-check-circle me-2"></i>
+                                Mettre à jour
+                            </button>
+                            
+                            <a href="{{ path('app_actualite_show', {'id': commentaire.actualite.id}) }}" 
+                               class="btn btn-outline-secondary">
+                                <i class="bi bi-arrow-left me-2"></i>
+                                Retour à l'actualité
+                            </a>
+                        </div>
+                        
+                        {{ form_end(commentaireForm) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

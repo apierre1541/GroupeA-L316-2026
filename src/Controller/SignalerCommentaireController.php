@@ -56,9 +56,9 @@ final class SignalerCommentaireController extends AbstractController
 
         return $this->render('signaler_commentaire/new.html.twig', [
             'signaler_commentaire' => $signalerCommentaire,
-            'form' => $form,
+            'commentaireSignalerForm' => $form->createView(),
             'commentaire' => $commentaire,
-            'actualite' => $actualite, // 🔥 À passer aussi au template
+            'actualite' => $actualite,
         ]);
     }
 }
