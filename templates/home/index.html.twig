@@ -8,7 +8,7 @@
 <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
     <div class="container">
         <a class="navbar-brand fw-bold" href="{{ path('app_home') }}">
-            <i class="bi bi-building me-2"></i> Notre Entreprise
+            <i class="bi bi-building me-2"></i>Nexus Digital
         </a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -20,21 +20,21 @@
                 <!-- Bouton Actualités -->
                 <li class="nav-item mx-1">
                     <a class="nav-link" href="/actualites">
-                        <i class="bi bi-newspaper me-1"></i> Actualités
+                        <i class="bi bi-newspaper me-1"></i>Actualités
                     </a>
                 </li>
                 
                 <!-- Bouton Présentation Entreprise -->
                 <li class="nav-item mx-1">
                     <a class="nav-link" href="/presentation/entreprise">
-                        <i class="bi bi-building me-1"></i> Présentation
+                        <i class="bi bi-building me-1"></i>Nexus Digital
                     </a>
                 </li>
                 
                 <!-- Bouton Contact -->
                 <li class="nav-item mx-1">
                     <a class="nav-link" href="/new">
-                        <i class="bi bi-envelope me-1"></i> Contact
+                        <i class="bi bi-envelope me-1"></i>Contact
                     </a>
                 </li>
 
@@ -43,7 +43,7 @@
                     {% if is_granted('ROLE_COLLABORATEUR') %}
                     <li class="nav-item mx-1">
                         <a class="nav-link btn btn-warning btn-sm text-dark" href="/admin">
-                            <i class="bi bi-shield-lock me-1"></i> Admin
+                            <i class="bi bi-shield-lock me-1"></i>Admin
                         </a>
                     </li>
                     {% endif %}
@@ -68,7 +68,7 @@
                             <li>
                                 <form method="post" action="/logout" class="dropdown-item p-0">
                                     <button type="submit" class="btn btn-link text-decoration-none text-dark w-100 text-start">
-                                        <i class="bi bi-box-arrow-right me-2"></i> Déconnexion
+                                        <i class="bi bi-box-arrow-right me-2"></i>Déconnexion
                                     </button>
                                 </form>
                             </li>
@@ -78,7 +78,7 @@
                     <!-- Bouton Inscription -->
                     <li class="nav-item mx-1">
                         <a class="nav-link" href="/inscription">
-                            <i class="bi bi-person-plus me-1"></i> Inscription
+                            <i class="bi bi-person-plus me-1"></i>Inscription
                         </a>
                     </li>
 
@@ -86,20 +86,20 @@
                     <li class="nav-item dropdown mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownConnexion"
                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-box-arrow-in-right me-1"></i> Connexion
+                            <i class="bi bi-box-arrow-in-right me-1"></i>Connexion
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownConnexion">
                             <!-- Client -->
                             <li>
                                 <a class="dropdown-item" href="{{ path('app_login') }}">
-                                    <i class="bi bi-person me-2"></i> Client
+                                    <i class="bi bi-person me-2"></i>Client
                                 </a>
                             </li>
                             
                             <!-- Collaborateur -->
                             <li>
                                 <a class="dropdown-item" href="{{ path('app_login') }}">
-                                    <i class="bi bi-shield-lock me-2"></i> Collaborateur
+                                    <i class="bi bi-shield-lock me-2"></i>Collaborateur
                                 </a>
                             </li>
                         </ul>
@@ -116,7 +116,7 @@
             <h1 class="display-4 fw-bold mb-4">Bienvenue sur notre site</h1>
             <p class="lead mb-4">Découvrez les dernières actualités et informations importantes</p>
             <a href="/actualites" class="btn btn-light btn-lg">
-                <i class="bi bi-arrow-right me-2"></i> Voir nos actualités
+                <i class="bi bi-arrow-right me-2"></i>Voir nos actualités
             </a>
         </div>
     </header>
@@ -127,7 +127,7 @@
             <div class="row mb-4">
                 <div class="col-12">
                     <h2 class="text-center mb-3">
-                        <i class="bi bi-megaphone me-2"></i> Dernières Actualités
+                        <i class="bi bi-megaphone me-2"></i>Dernières Actualités
                     </h2>
                     <p class="text-center text-muted">Restez informé avec nos dernières publications</p>
                 </div>
@@ -164,7 +164,7 @@
                                     
                                     <div class="mt-auto pt-3">
                                         <a href="{{ path('app_actualite_show', {'id': actualite.id}) }}" class="btn btn-outline-primary w-100">
-                                            <i class="bi bi-eye me-1"></i> Lire la suite
+                                            <i class="bi bi-eye me-1"></i>Lire la suite
                                         </a>
                                     </div>
                                 </div>
@@ -175,7 +175,7 @@
                 
             {% else %}
                 <div class="alert alert-info text-center py-4">
-                    <i class="bi bi-info-circle me-2"></i> Aucune actualité pour le moment.
+                    <i class="bi bi-info-circle me-2"></i>Aucune actualité pour le moment.
                 </div>
             {% endif %}
         </div>
@@ -211,23 +211,16 @@
                         fait du code un véritable levier de connexion et de croissance.
                         Chez Nexus, chaque projet est pensé pour durer, performer et marquer les esprits.
                     </p>
-                    <div class="social-icons">
-                        <a href="#"><i class="bi bi-facebook"></i></a>
-                        <a href="#"><i class="bi bi-twitter"></i></a>
-                        <a href="#"><i class="bi bi-linkedin"></i></a>
-                        <a href="#"><i class="bi bi-instagram"></i></a>
-                    </div>
                 </div>
                 
                 <!-- Colonne 2 : Liens rapides -->
                 <div class="col-lg-4 col-md-6 mb-4">
                     <h5>Liens rapides</h5>
                     <ul class="list-unstyled">
-                        <li><a href="{{ path('app_home') }}"><i class="bi bi-chevron-right"></i> Accueil</a></li>
-                        <li><a href="/admin/actualite"><i class="bi bi-chevron-right"></i> Actualités</a></li>
-                        <li><a href="/admin/actualite"><i class="bi bi-chevron-right"></i> Présentation</a></li>
-                        <li><a href="/admin/actualite"><i class="bi bi-chevron-right"></i> Contact</a></li>
-                        <li><a href="/admin/actualite"><i class="bi bi-chevron-right"></i> Inscription</a></li>
+                        <li><a href="{{ path('app_home') }}"><i class="bi bi-chevron-right"></i>Accueil</a></li>
+                        <li><a href="/actualites"><i class="bi bi-chevron-right"></i>Actualités</a></li>
+                        <li><a href="/presentation/entreprise"><i class="bi bi-chevron-right"></i>Nexus Digital</a></li>
+                        <li><a href="/new"><i class="bi bi-chevron-right"></i>Contact</a></li>
                     </ul>
                 </div>
                 
@@ -235,21 +228,10 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <h5>Contactez-nous</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class="bi bi-geo-alt"></i> 123 Rue de l'Innovation, 75000 Paris</a></li>
-                        <li><a href="tel:+33123456789"><i class="bi bi-telephone"></i> +33 1 23 45 67 89</a></li>
-                        <li><a href="mailto:contact@notreentreprise.com"><i class="bi bi-envelope"></i> contact@notreentreprise.com</a></li>
+                        <li><a href="#"><i class="bi bi-geo-alt"></i>25 rue des montagnes, 15000 Aurillac</a></li>
+                        <li><a href="tel:+33123456789"><i class="bi bi-telephone"></i>+33 4 23 45 67 89</a></li>
+                        <li><a href="mailto:contact@notreentreprise.com"><i class="bi bi-envelope"></i>contact@nexusdigital.com</a></li>
                     </ul>
-                    
-                    <!-- Newsletter -->
-                    <div class="newsletter-form">
-                        <h6 class="mb-3">Restez informé</h6>
-                        <div class="input-group">
-                            <input type="email" class="form-control" placeholder="Votre email">
-                            <button class="btn" type="button">
-                                <i class="bi bi-send"></i>
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
             
@@ -258,14 +240,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <p>
-                            <i class="bi bi-c-circle"></i> {{ "now"|date("Y") }} Notre Entreprise. 
+                            <i class="bi bi-c-circle"></i> {{ "now"|date("Y") }} Nexus Digital. 
                             Tous droits réservés.
-                        </p>
-                    </div>
-                    <div class="col-md-6 text-md-end">
-                        <p>
-                            <a href="#" class="me-3">Mentions légales</a>
-                            <a href="#">Politique de confidentialité</a>
                         </p>
                     </div>
                 </div>
