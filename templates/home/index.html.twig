@@ -139,7 +139,7 @@
                         <div class="col-md-4 mb-4">
                             <div class="card h-100 shadow-sm">
                                 {% if actualite.image %}
-                                    <img src="{{ asset('uploads/' ~ actualite.image) }}" 
+                                    <img src="{{ asset('actualites/' ~ actualite.image) }}" 
                                          class="card-img-top" 
                                          alt="{{ actualite.titre }}">
                                 {% else %}
@@ -159,7 +159,7 @@
                                     </div>
                                     
                                     <p class="card-text flex-grow-1">
-                                        {{ actualite.contenu|slice(0, 100) }}...
+                                        {{ actualite.contenu|raw }}
                                     </p>
                                     
                                     <div class="mt-auto pt-3">

@@ -17,10 +17,12 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CommentaireController extends AbstractController
 {
     #[Route('/actualite/{id}/commentaire/new', name: 'app_commentaire_new', methods: ['GET', 'POST'])]
-    public function new(Request $request,Actualite $actualite,EntityManagerInterface $entityManager): Response
+    public function new(Request $request, Actualite $actualite, EntityManagerInterface $entityManager): Response
     {
         $commentaire = new Commentaire();
         $commentaire->setActualite($actualite);
+        
+        $commentaire->setUtilisateur($this->getUser()); 
         
         $form = $this->createForm(CommentaireType::class, $commentaire);
         $form->handleRequest($request);
@@ -49,7 +51,9 @@ final class CommentaireController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_commentaire_index', [], Response::HTTP_SEE_OTHER);
+            $actualite = $commentaire->getActualite();
+            
+            return $this->redirectToRoute('app_actualite_show', ['id' => $actualite->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('commentaire/edit.html.twig', [
@@ -65,6 +69,8 @@ final class CommentaireController extends AbstractController
             $entityManager->remove($commentaire);
             $entityManager->flush();
         }
+
+        $actualite = $commentaire->getActualite();
 
         return $this->redirectToRoute('app_actualite_show', ['id' => $actualite->getId()], Response::HTTP_SEE_OTHER);
     }

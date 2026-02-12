@@ -14,7 +14,7 @@
                     <div class="col-md-6 col-lg-4 mb-4">
                         <div class="card h-100">
                             {% if actualite.image %}
-                                <img src="{{ asset('uploads/' ~ actualite.image) }}" 
+                                <img src="{{ asset('actualites/' ~ actualite.image) }}" 
                                      class="card-img-top" 
                                      alt="{{ actualite.titre }}"
                                      style="height: 200px; object-fit: cover;">
@@ -27,7 +27,7 @@
                                     {{ actualite.date|date('d/m/Y') }}
                                 </p>
                                 <p class="card-text">
-                                    {{ actualite.contenu|slice(0, 150) }}...
+                                    {{ actualite.contenu|raw }}
                                 </p>
                                 <a href="{{ path('app_actualite_show', {'id': actualite.id}) }}" 
                                    class="btn btn-primary">

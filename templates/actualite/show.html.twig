@@ -3,45 +3,105 @@
 {% block title %}{{ actualite.titre }}{% endblock %}
 
 {% block body %}
-    <div class="container py-5">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="{{ path('app_home') }}">Accueil</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="{{ path('app_actualite_index') }}">Actualités</a>
-                </li>
-                <li class="breadcrumb-item active">{{ actualite.titre|slice(0, 30) }}...</li>
-            </ol>
-        </nav>
-        
+    <div class="container py-5">      
+        {# Article #}
         <article>
-            <h1 class="mb-3">{{ actualite.titre }}</h1>
+            <h1 class="mb-3 fw-bold">{{ actualite.titre }}</h1>
             
             <div class="text-muted mb-4">
                 <i class="bi bi-calendar"></i> 
-                Publié le {{ actualite.date|date('d/m/Y à H:i') }}
+                Publié le {{ actualite.date|date('d/m/Y') }}
             </div>
             
             {% if actualite.image %}
-                <img src="{{ asset('uploads/' ~ actualite.image) }}" 
-                     class="img-fluid rounded mb-4" 
-                     alt="{{ actualite.titre }}">
+                <img src="{{ asset('actualites/' ~ actualite.image) }}" 
+                    class="img-fluid rounded-3 shadow-sm mb-4" 
+                    alt="{{ actualite.titre }}">
             {% endif %}
             
-            <div class="actualite-content">
-                {{ actualite.contenu|nl2br }}
+            <div class="actualite-content bg-light p-4 rounded-3 mb-5">
+                {{ actualite.contenu|raw }}
             </div>
             
-            <hr class="my-4">
+            <div class="commentaires-section mt-5">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="h3 text-primary mb-0">
+                        <i class="bi bi-chat-dots me-2"></i>
+                        Commentaires ({{ actualite.commentaires|length }})
+                    </h2>
+                    <a href="{{ path('app_commentaire_new', {'id': actualite.id}) }}" 
+                       class="btn btn-primary rounded-pill px-4">
+                        <i class="bi bi-plus-circle me-2"></i>Ajouter un commentaire
+                    </a>
+                </div>
+                
+                {% if actualite.commentaires|length > 0 %}
+                    <div class="list-group mb-4">
+                        {% for comment in actualite.commentaires %}
+                            <div class="list-group-item border-0 bg-light p-4 rounded-3 mb-3">
+                                <div class="d-flex w-100 justify-content-between align-items-start">
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-2">
+                                                <i class="bi bi-person-circle text-primary"></i>
+                                            </div>
+                                            <span class="fw-bold text-dark">Commentaire #{{ loop.index }}</span>
+                                        </div>
+                                        <p class="mb-3 text-dark">{{ comment.libelle }}</p>
+                                        
+                                        <div class="d-flex gap-2">
+                                            {% if is_granted('ROLE_COLLABORATEUR') or (app.user and comment.utilisateur and app.user.id == comment.utilisateur.id) %}
+                                                <a href="{{ path('app_commentaire_edit', {'id': comment.id}) }}" 
+                                                class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                                                    <i class="bi bi-pencil me-1"></i>Modifier
+                                                </a>
+                                            {% endif %}
+                                            
+                                            <a href="{{ path('app_signaler_commentaire_new', {'id': comment.id}) }}" 
+                                            class="btn btn-outline-warning btn-sm rounded-pill px-3">
+                                                <i class="bi bi-flag me-1"></i>Signaler
+                                            </a>
+                                            
+                                            {% if is_granted('ROLE_COLLABORATEUR') %}
+                                                <form method="post" 
+                                                    action="{{ path('app_commentaire_delete', {'id': comment.id}) }}" 
+                                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ? Cette action est irréversible.');"
+                                                    style="display: inline;">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+                                                    <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill px-3">
+                                                        <i class="bi bi-trash me-1"></i>Supprimer
+                                                    </button>
+                                                </form>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {# Aucun commentaire #}
+                    <div class="text-center bg-light p-5 rounded-3 mb-4">
+                        <i class="bi bi-chat fs-1 text-muted d-block mb-3"></i>
+                        <h3 class="h5 text-muted">Aucun commentaire pour le moment</h3>
+                        <p class="text-muted mb-3">Soyez le premier à donner votre avis !</p>
+                        <a href="{{ path('app_commentaire_new', {'id': actualite.id}) }}" 
+                           class="btn btn-outline-primary rounded-pill px-4">
+                            <i class="bi bi-plus-circle me-2"></i>Ajouter un commentaire
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
             
+            <hr class="my-5">
+            
+            {# Boutons de navigation #}
             <div class="d-flex justify-content-between">
-                <a href="{{ path('app_actualite_index') }}" class="btn btn-outline-primary">
-                    <i class="bi bi-arrow-left"></i> Retour aux actualités
+                <a href="{{ path('app_actualite_index') }}" class="btn btn-outline-primary px-4 py-2">
+                    <i class="bi bi-arrow-left me-2"></i>Retour aux actualités
                 </a>
-                <a href="{{ path('app_home') }}" class="btn btn-outline-secondary">
-                    <i class="bi bi-house"></i> Accueil
+                <a href="{{ path('app_home') }}" class="btn btn-outline-secondary px-4 py-2">
+                    <i class="bi bi-house me-2"></i>Accueil
                 </a>
             </div>
         </article>

@@ -19,7 +19,12 @@ class Commentaire
     private ?string $libelle = null;
 
     #[ORM\ManyToOne(inversedBy: 'commentaires')]
+    #[ORM\JoinColumn(nullable: false)] 
     private ?Actualite $actualite = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $utilisateur = null;
 
     /**
      * @var Collection<int, SignalerCommentaire>
@@ -87,6 +92,17 @@ class Commentaire
             }
         }
 
+        return $this;
+    }
+
+    public function getUtilisateur(): ?User
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?User $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
         return $this;
     }
 }
