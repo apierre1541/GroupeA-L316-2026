@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Actualite;
 use App\Entity\Categorie;
 use App\Entity\PresentationEntreprise;
+use App\Entity\SignalerCommentaire;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -31,5 +32,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Gestion des posts', 'fas fa-list', Actualite::class);
         yield MenuItem::linkToCrud('Gestion des categories', 'fas fa-list', Categorie::class);
         yield MenuItem::linkToCrud('Gestion de la presentation de Nexus Digital', 'fas fa-list', PresentationEntreprise::class);
+        yield MenuItem::linkToCrud('Liste des signalement fait pas les utilisateur', 'fas fa-warning', SignalerCommentaire::class);
     }
 }
