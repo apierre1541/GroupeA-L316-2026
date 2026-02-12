@@ -22,7 +22,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('GroupeA L316 2026');
+            ->setTitle('Partie Admin de Nexus Digital');
     }
 
     public function configureMenuItems(): iterable
@@ -30,6 +30,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Gestion des posts', 'fas fa-list', Actualite::class);
         yield MenuItem::linkToCrud('Gestion des categories', 'fas fa-list', Categorie::class);
-        yield MenuItem::linkToCrud('Gestion de la presentation de entreprise', 'fas fa-list', PresentationEntreprise::class);
+        yield MenuItem::linkToCrud('Gestion de la presentation de Nexus Digital', 'fas fa-list', PresentationEntreprise::class);
     }
 }
