@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use Symfony\Component\Validator\Constraints\Image;
 
 class PresentationEntrepriseCrudController extends AbstractCrudController
 {
@@ -23,7 +24,10 @@ class PresentationEntrepriseCrudController extends AbstractCrudController
     {
         return [
             ImageField::new('logo')->setColumns(12)->setBasePath('/presentation_entreprise')->setUploadDir('/public/presentation_entreprise'),
-            ImageField::new('image')->setColumns(12)->setBasePath('/presentation_entreprise')->setUploadDir('/public/presentation_entreprise'),
+            ImageField::new('image')
+                ->setColumns(12)
+                ->setBasePath('/presentation_entreprise')
+                ->setUploadDir('/public/presentation_entreprise'),
             TextEditorField::new('service_proposee')->setColumns(12),
             EmailField::new('email')->setColumns(12)->setHelp('Format : nom@domaine.fr'),
             TelephoneField::new('telephone')->setColumns(12)->setHelp('Format: +33 X XX XX XX XX'),

@@ -5,7 +5,7 @@
 {% block body %}
    <div class="container my-5">
         <div class="bg-primary text-white p-5 rounded-4 mb-5 text-center">
-            <h1 class="display-5 fw-bold">Présentation de notre entreprise</h1>
+            <h1 class="display-5 fw-bold">Présentation de Nexus Digital</h1>
         </div>
 
         {# Boucle pour afficher TOUTES les entreprises #}
@@ -15,14 +15,14 @@
                     <div class="card border-0 shadow h-100">
                         <div class="card-body text-center p-4">
                             {% if entreprise.logo %}
-                                <img src="{{ asset('uploads/logos/' ~ entreprise.logo) }}" 
+                                <img src="{{ asset('presentation_entreprise/' ~ entreprise.logo) }}" 
                                     alt="Logo" 
                                     class="img-fluid rounded-circle mb-4 shadow-sm"
                                     style="max-width: 150px;">
                             {% endif %}
                             
                             {% if entreprise.image %}
-                                <img src="{{ asset('uploads/images/' ~ entreprise.image) }}" 
+                                <img src="{{ asset('presentation_entreprise/' ~ entreprise.image) }}" 
                                     alt="Image entreprise" 
                                     class="img-fluid rounded-3 shadow-sm">
                             {% endif %}
@@ -40,19 +40,15 @@
                 <div class="col-lg-7">
                     <div class="card border-0 shadow h-100">
                         <div class="card-body p-4 p-lg-5">
-                            <h2 class="h3 text-primary mb-4">
-                                <i class="bi bi-briefcase me-2"></i>Nos services - Entreprise #{{ loop.index }}
-                            </h2>
+                            <h2 class="h3 text-primary mb-4">Les services que nous proposons sont : </h2>
                             
                             <div class="bg-light p-4 rounded-3 mb-5">
                                 <p class="lead mb-0 text-secondary">
-                                    {{ entreprise.serviceProposee }}
+                                    {{ entreprise.serviceProposee|raw }}
                                 </p>
                             </div>
                             
-                            <h3 class="h5 text-dark mb-4">
-                                <i class="bi bi-telephone me-2"></i>Contactez-nous
-                            </h3>
+                            <h3 class="h5 text-dark mb-4">Contactez-nous</h3>
                             
                             <div class="list-group list-group-flush">
                                 <div class="list-group-item bg-transparent px-0">
@@ -105,9 +101,7 @@
         {% else %}
             {# Aucune entreprise trouvée #}
             <div class="alert alert-info text-center py-5">
-                <i class="bi bi-building fs-1 d-block mb-3"></i>
-                <h3>Aucune entreprise trouvée</h3>
-                <p class="mb-4">Aucune information d'entreprise n'est disponible pour le moment.</p>
+                <h3>L'entreprise n'a pas était trouvé</h3>
                 <a href="{{ path('app_home') }}" class="btn btn-primary">
                     <i class="bi bi-house me-2"></i>Retour à l'accueil
                 </a>

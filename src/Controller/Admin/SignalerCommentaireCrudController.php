@@ -28,7 +28,7 @@ class SignalerCommentaireCrudController extends AbstractCrudController
                     $commentaire = $entity->getCommentaire();
                     
                     if (!$commentaire) {
-                        return '<span style="color: red;">❌ Commentaire supprimé</span>';
+                        return '<span style="color: red;">Commentaire supprimé</span>';
                     }
                     
                     return sprintf(
